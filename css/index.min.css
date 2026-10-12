@@ -1,0 +1,181 @@
+body {
+  background: #f3f3f3;
+  font-family: "Open Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+}
+body h4 {
+  padding: 0;
+  margin: 0;
+}
+body .btn {
+  border-radius: 2rem !important;
+}
+body .btn-primary {
+  background: #c42f2f;
+  border: none;
+}
+body h2 {
+  color: #c42f2f;
+  font-family: "Playfair Display", serif;
+  font-size: 1.5rem;
+}
+body label {
+  color: #c42f2f;
+  font-weight: 500;
+}
+body input.form-control {
+  height: 2.6rem;
+  display: flex;
+}
+body .wrap-text {
+  word-wrap: break-word;
+  white-space: normal;
+}
+body #comidas .campo-adicional,
+body #actividades .campo-adicional,
+body #medicamentos .campo-adicional {
+  margin: 0 0 2rem 0;
+}
+body #formularioTareas label {
+  font-size: 0.8rem;
+}
+body .form-check {
+  display: flex;
+}
+body .form-check .form-check-input {
+  margin: 0 0.5rem 0 0;
+}
+body .nota {
+  font-style: italic;
+  font-size: 0.9rem;
+  padding: 1rem;
+  margin: 0;
+  background: rgba(187, 45, 45, 0.04);
+  text-align: center;
+}
+body h3 {
+  color: #c42f2f;
+  font-family: "Playfair Display", serif;
+  font-size: 1.2rem;
+  padding: 2.5rem 0 1.5rem 0;
+  margin: 0;
+}
+body #filtroSemanas {
+  background: rgba(0, 0, 0, 0.04);
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+}
+body #filtroSemanas h3 {
+  padding: 0 0 2rem 0;
+}
+body .table-horas td {
+  font-size: 0.8rem;
+  vertical-align: middle;
+}
+body .table .center {
+  text-align: center;
+}
+body .table .check {
+  color: #c42f2f;
+  font-size: 0.8rem;
+}
+body .table .cross {
+  opacity: 0.5;
+  font-size: 0.8rem;
+}
+body .table .tarea {
+  font-size: 0.8rem;
+}
+body .table thead th {
+  font-size: 0.8rem;
+  text-align: center;
+}
+body .table.tabla-firmas {
+  font-size: 0.75rem;
+  font-weight: bold;
+  text-align: center;
+}
+body .table.tabla-firmas span {
+  border-bottom: dashed 1px #333333;
+  display: block;
+  font-family: "Satisfy", cursive;
+  font-size: 2.5rem;
+  height: 6rem;
+  font-weight: 400;
+  text-transform: capitalize;
+  width: 100%;
+}
+body .table.tabla-firmas span:first-letter {
+  text-transform: uppercase;
+}
+body .admin-bar {
+  display: flex;
+  justify-content: space-between;
+  background: #c42f2f;
+  padding: 0.5rem 1rem;
+  margin: 1rem 0 2rem 0;
+  align-items: center;
+  border-radius: 0.2rem;
+}
+body .admin-bar h2 {
+  color: #FFFFFF;
+  font-size: 1.5rem;
+  margin: 0;
+}
+body .admin-bar a {
+  color: #FFFFFF;
+}
+body .signature-pad {
+  width: 100% !important;
+  height: 200px !important;
+  border: 1px dashed #ccc !important;
+  background: #FFFFFF;
+}
+body .align-left {
+  text-align: left !important;
+}
+body .align-right {
+  text-align: right !important;
+}
+
+.btn-eliminar .eliminar-registro {
+  background: #c42f2f;
+  border: none;
+  border-radius: 0.3rem;
+  color: #FFFFFF;
+  display: none;
+}
+.btn-eliminar:hover .eliminar-registro {
+  display: inline-block;
+  margin: 0.1rem 0 0.1rem 0.5rem;
+}
+
+.header-caregiver {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 0 2rem 0;
+}
+@media (max-width: 700px) {
+  .header-caregiver {
+    display: block !important;
+  }
+}
+.header-caregiver h2 {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+.header-caregiver a {
+  background: #6c757d;
+  border-radius: 2rem;
+  color: #FFFFFF;
+  font-size: 0.9rem;
+  padding: 0.5rem 1rem;
+  text-decoration: none;
+}
+@media (max-width: 700px) {
+  .header-caregiver a {
+    display: block;
+    margin-top: 2rem;
+  }
+}/*# sourceMappingURL=index.min.css.map */

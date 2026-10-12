@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Control</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <link href="css/index.min.css" rel="stylesheet">
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>    
+    <script src="https://cdn.jsdelivr.net/npm/signature_pad@4.0.0/dist/signature_pad.umd.min.js"></script>
+
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+
+    <style>
+        .signature-pad {
+            width: 100%;
+            height: 200px;
+            border: 1px solid #ccc;
+        }
+    </style>
+
+</head>
+<body>
+
+
+
+
+    <div class="container mt-5">
+        <div class="header-caregiver"><h2 class="mb-4">A PREMIER HOME PROVIDER SERVICE LLC</h2><a style="display:none;" href="">View records</a></div>
+        <form id="tareasForm" method="post" action="app/registrar_tarea.php">
+
+            <div class="row">
+                <label class="form-label">Caregiver ID:</label>
+                <div class="mb-3 col-lg-10">                    
+                    <input type="text" class="form-control" id="identificacion" name="identificacion" required>
+                </div>
+                <div class="mb-3 col-lg-2 d-grid gap-2">
+                    <button type="button" class="btn btn-primary" id="consultarEmpleado">Search</button>
+                </div>
+            </div>
+
+            <br />
+            <br />            
+
+            <div class='alert alert-danger' role='alert' style="display: none;" id="alertUser">Unregistered caregiver</div>
+
+            <div id="formularioTareas" style="display:none;">
+
+                <div class="row">
+                    <div class="mb-3 col-lg-3 col-md-6">
+                        <label class="form-label">Client Name:</label>                        
+                        <select class="form-select" id="client_name" name="client_name">
+                            <!-- Opciones se agregarán dinámicamente aquí -->
+                        </select>
+                    </div>
+                    <div class="mb-3 col-lg-3 col-md-6">
+                        <label class="form-label">Caregiver name:</label>
+                        <input type="text" class="form-control" name="caregiver_name" id="caregiver_name" required readonly>
+                    </div>
+                    <div class="mb-3 col-lg-3 col-md-6">
+                        <label class="form-label">ROLE:</label>
+                        <select class="form-select" name="rol" required>
+                            <option value="LPN">LPN</option>
+                            <option value="CNA">CNA</option>
+                            <option value="HHA">HHA</option>
+                            <option value="Companion">Companion</option>
+                        </select>
+                    </div>
+                    <div class="mb-3 col-lg-3 col-md-6">
+                        <label class="form-label">Select Day to Fill:</label>
+                        <input type="date" class="form-control" name="fecha_registro" required>
+                    </div>
+                </div>
+
+
+                <p class="nota">Pursuant to regulations by the Nurse registry for Health care Administration, it is mandatory that Care Provider documents any changes in care services</p>
+
+                <br />
+                <br />
+
+
+                <div class="accordion" id="accordionExample">
+                    <div class="accordion-item">
+                      <h2 class="accordion-header" id="headingOne">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                          Care Log
+                        </button>
+                      </h2>
+                      <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                            <h3 class="mt-4">PERSONAL CARE/ADL ASSISTANCE</h3>
+                            <div class="mb-3">
+            
+                                <div class="row">
+                                    <div class="form-check col-lg-4 col-md-12">
+                                        <input class="form-check-input" type="checkbox"  name="tareas[]" value="BATHING_SHOWER" id="tarea1">
+                                        <label class="form-check-label" for="tarea1">BATHING/SHOWER</label>
+                                    </div>                        
+                                    <div class="form-check col-lg-4 col-md-12">
+                                        <input class="form-check-input" type="checkbox"  name="tareas[]" value="DRESSING" id="tarea2">
+                                        <label class="form-check-label" for="tarea2">DRESSING</label>
+                                    </div>                    
+                                    <div class="form-check col-lg-4 col-md-12">
+                                        <input class="form-check-input" type="checkbox"  name="tareas[]" value="AMBULATION" id="tarea3">
+                                        <label class="form-check-label" for="tarea3">AMBULATION</label>
+                                    </div>
+                                </div>
+            
+                                <div class="row">
+                                    <div class="form-check col-lg-4 col-md-12">
+                                        <input class="form-check-input" type="checkbox"  name="tareas[]" value="TRANSFERRING" id="tarea4">
+                                        <label class="form-check-label" for="tarea4">TRANSFERRING</label>
+                                    </div>    
+                                    <div class="form-check col-lg-4 col-md-12">
+                                        <input class="form-check-input" type="checkbox"  name="tareas[]" value="RE_POSITIONING" id="tarea5">
+                                        <label class="form-check-label" for="tarea5">RE-POSITIONING</label>
+                                    </div>    
+                                    <div class="form-check col-lg-4 col-md-12">
+                                        <input class="form-check-input" type="checkbox"  name="tareas[]" value="RANGE_OF_MOTION_ASSISTANCE" id="tarea6">
+                                        <label class="form-check-label" for="tarea6">RANGE OF MOTION ASSISTANCE</label>
+                                    </div>
+                                </div>
+            
+                                <div class="row">
+                                    <div class="form-check col-lg-4 col-md-12">
+                                        <input class="form-check-input" type="checkbox"  name="tareas[]" value="FEEDING" id="tarea7">
+                                        <label class="form-check-label" for="tarea7">FEEDING</label>
+                                    </div>
+                                    <div class="form-check col-lg-4 col-md-12">
+                                        <input class="form-check-input" type="checkbox"  name="tareas[]" value="GROOMING_SHAVING_HAIR_CARE" id="tarea8">
+                                        <label class="form-check-label" for="tarea8">GROOMING, SHAVING HAIR CARE</label>
+                                    </div>                    
+                                    <div class="form-check col-lg-4 col-md-12">
+                                        <input class="form-check-input" type="checkbox"  name="tareas[]" value="APPLY_LOTION" id="tarea9">
+                                        <label class="form-check-label" for="tarea9">APPLY LOTION</label>
+                                    </div>
+                                </div>
+            
+                                <div class="row">
+                                    <div class="form-check col-lg-4 col-md-12">
+                                        <input class="form-check-input" type="checkbox"  name="tareas[]" value="ORAL_HYGIENE" id="tarea10">
+                                        <label class="form-check-label" for="tarea10">ORAL HYGIENE</label>
+                                    </div>
+                                    <div class="form-check col-lg-4 col-md-12">
+                                        <input class="form-check-input" type="checkbox"  name="tareas[]" value="TOILETING" id="tarea11">
+                                        <label class="form-check-label" for="tarea11">TOILETING</label>
+                                    </div>
+                                    <div class="form-check col-lg-4 col-md-12">
+                                        <input class="form-check-input" type="checkbox"  name="tareas[]" value="INCONTINENCE_CARE" id="tarea12">
+                                        <label class="form-check-label" for="tarea12">INCONTINENCE CARE/DIAPER CHANGE</label>
+                                    </div>
+                                </div>
+            
+                                <div class="row">
+                                    <div class="form-check col-lg-4 col-md-12">
+                                        <input class="form-check-input" type="checkbox"  name="tareas[]" value="ASSIST_WITH_OSTOMY_CARE" id="tarea13">
+                                        <label class="form-check-label" for="tarea13">ASSIST WITH OSTOMY CARE</label>
+                                    </div>
+                                    <div class="form-check col-lg-4 col-md-12">
+                                        <input class="form-check-input" type="checkbox"  name="tareas[]" value="RECORD_VITAL_SIGNS" id="tarea14">
+                                        <label class="form-check-label" for="tarea14">RECORD VITAL SIGNS</label>
+                                    </div>
+                                    <div class="form-check col-lg-4 col-md-12">
+                                        <input class="form-check-input" type="checkbox"  name="tareas[]" value="RECORD_INTAKE_OUTPUT" id="tarea15">
+                                        <label class="form-check-label" for="tarea15">RECORD INTAKE/OUTPUT</label>
+                                    </div>
+                                </div>
+                                
+                                <div class="row">
+                                    <div class="form-check col-lg-4 col-md-12">
+                                        <input class="form-check-input" type="checkbox"  name="tareas[]" value="RECORD_WEIGHT" id="tarea16">
+                                        <label class="form-check-label" for="tarea16">RECORD WEIGHT</label>
+                                    </div>
+                                    <div class="form-check col-lg-4 col-md-12">
+                                        <input class="form-check-input" type="checkbox"  name="tareas[]" value="OBSERVE_CHANGES" id="tarea17">
+                                        <label class="form-check-label" for="tarea17">OBSERVE PHYSICAL & MENTAL CHANGES</label>
+                                    </div>                    
+                                    <div class="form-check col-lg-4 col-md-12">
+                                        <input class="form-check-input" type="checkbox"  name="tareas[]" value="REMIND_MEDICATIONS" id="tarea18">
+                                        <label class="form-check-label" for="tarea18">REMIND PATIENT OF MEDICATIONS</label>
+                                    </div>
+                                </div>
+            
+                                <div class="row">
+                                    <div class="form-check col-lg-4 col-md-12">
+                                        <input class="form-check-input" type="checkbox" name="tareas[]" value="ASSIST_MEDICATION_ADMINISTRATION" id="tarea19">
+                                        <label class="form-check-label" for="tarea19">ASSIST PATIENT WITH SELF ADMINISTRATION OF MEDICATION</label>
+                                    </div>
+                                </div>               
+            
+                                
+                            </div>
+            
+                            <h3 class="mt-4">COMPANIONSHIP</h3>
+                            <div class="mb-3">
+            
+                                <div class="row">                    
+                                    <div class="form-check col-lg-4 col-md-12">
+                                        <input class="form-check-input" type="checkbox" name="tareas[]" value="ADL_SUPERVISION" id="tarea20">
+                                        <label class="form-check-label" for="tarea20">ADL SUPERVISION/STANDBY ASSIST</label>
+                                    </div>
+                                    <div class="form-check col-lg-4 col-md-12">
+                                        <input class="form-check-input" type="checkbox" name="tareas[]" value="ACCOMPANY_APPOINTMENTS" id="tarea21">
+                                        <label class="form-check-label" for="tarea21">ACCOMPANY TO APPOINTMENTS</label>
+                                    </div>
+                                    <div class="form-check col-lg-4 col-md-12">
+                                        <input class="form-check-input" type="checkbox" name="tareas[]" value="PREPARE_MEALS" id="tarea22">
+                                        <label class="form-check-label" for="tarea22">PREPARE MEALS</label>
+                                    </div>
+                                </div>
+            
+                                <div class="row">
+                                    <div class="form-check col-lg-4 col-md-12">
+                                        <input class="form-check-input" type="checkbox" name="tareas[]" value="GROCERY_SHOPPING" id="tarea23">
+                                        <label class="form-check-label" for="tarea23">GROCERY SHOPPING</label>
+                                    </div>
+                                    <div class="form-check col-lg-4 col-md-12">
+                                        <input class="form-check-input" type="checkbox" name="tareas[]" value="CHANGE_BED_LINEN" id="tarea24">
+                                        <label class="form-check-label" for="tarea24">CHANGE BED LINEN</label>
+                                    </div>
+                                    <div class="form-check col-lg-4 col-md-12">
+                                        <input class="form-check-input" type="checkbox" name="tareas[]" value="LAUNDRY" id="tarea25">
+                                        <label class="form-check-label" for="tarea25">LAUNDRY</label>
+                                    </div>
+                                </div>
+            
+                                <div class="row">
+                                    <div class="form-check col-lg-4 col-md-12">
+                                        <input class="form-check-input" type="checkbox" name="tareas[]" value="LIGHT_HOUSEKEEPING" id="tarea26">
+                                        <label class="form-check-label" for="tarea26">LIGHT HOUSEKEEPING</label>
+                                    </div>
+                                    <div class="form-check col-lg-4 col-md-12">
+                                        <input class="form-check-input" type="checkbox" name="tareas[]" value="COSMETIC_ASSISTANCE" id="tarea27">
+                                        <label class="form-check-label" for="tarea27">COSMETIC ASSISTANCE</label>
+                                    </div>
+                                </div>  
+                            
+                                
+                            </div>
+            
+                            <h3 class="mt-4">HOURLY</h3>
+            
+                            <div class="row">
+                                <div class="mb-3 col-4">
+                                    <label class="form-label">TIME STARTED</label>
+                                    <input type="time" class="form-control" id="time_started" name="time_started" onchange="calcularHoras()" required>
+                                </div>
+                                <div class="mb-3 col-4">
+                                    <label class="form-label">TIME FINISHED</label>
+                                    <input type="time" class="form-control" id="time_finished" name="time_finished" onchange="calcularHoras()" required>
+                                </div>
+                                <div class="mb-3 col-4">
+                                    <label class="form-label">TOTAL HOURS</label>
+                                    <input type="number" class="form-control" id="total_hours" name="total_hours" step="0.01" readonly>
+                                </div>
+                            </div>
+            
+            
+                            <div class="row hide" style="display: none;">
+                                <div class="mb-3 col-6">
+                                    <label class="form-label">Caregiver Signature:</label>
+                                    <input type="text" class="form-control" name="firma_empleado" id="firma_empleado" required readonly>
+                                </div>
+                                <div class="mb-3 col-6">
+                                    <label class="form-label">Client Signature:</label>
+                                    <input type="text" class="form-control" name="firma_cliente" id="firma_cliente" required readonly>
+                                </div>
+                            </div>
+            
+            
+                            <div class="form-group">
+                                <input type="hidden" id="firmaCliente" name="firmaCliente">
+                                <label for="firmaCliente">Client Signature</label>
+                                <canvas id="signaturePad" class="signature-pad border"></canvas>                    
+                            </div>                
+            
+                            <button id="clearSignature" class="btn btn-secondary">Clear signature</button>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="accordion-item">
+                      <h2 class="accordion-header" id="headingTwo">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                            Client Daily Record Sheet
+                        </button>
+                      </h2>
+                      <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                          
+                            <div id="comidas" class="card"> 
+                                <div class="card-body">
+                                    <div class="campo-adicional">
+                                        <div class="row">
+                                            <div class="col-md-4 col-sm-12">
+                                                <label>Food</label>
+                                                <input type="text" name="comida[]" class="form-control">
+                                            </div>
+                                            <div class="col-md-4 col-sm-12">
+                                                <label>Amount</label>
+                                                <input type="text" name="cantidad_comida[]" class="form-control">
+                                            </div>
+                                            <div class="col-md-4 col-sm-12">
+                                                <label>Time</label>
+                                                <input type="time" name="hora_comida[]" class="form-control">
+                                            </div>
+                                            <div class="col-md-12">
+                                                <label>Comments</label>
+                                                <textarea name="comentario_comida[]" class="form-control" rows="3"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <br />
+                            <button type="button" class="btn btn-secondary btn-sm" onclick="agregarComida()">Add food</button> 
+                            <br />
+                            <br />
+                            <br />
+                
+                            <div id="actividades" class="card">
+                                <div class="card-body">
+                                    <div class="campo-adicional">
+                                        <div class="row">
+                                            <div class="col-md-4 col-sm-12">
+                                                <label>Activities</label>
+                                                <input type="text" name="actividad[]" class="form-control">
+                                            </div>
+                                            <div class="col-md-4 col-sm-12">
+                                                <label>Duration</label>
+                                                <input type="text" name="duracion_actividad[]" class="form-control">
+                                            </div>
+                                            <div class="col-md-4 col-sm-12">
+                                                <label>Time</label>
+                                                <input type="time" name="hora_actividad[]" class="form-control">
+                                            </div>
+                                            <div class="col-md-12">
+                                                <label>Comments</label>
+                                                <textarea name="comentario_actividad[]" class="form-control" rows="3"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <br />
+                            <button type="button" class="btn btn-secondary btn-sm" onclick="agregarActividad()">Add activity</button>
+                            <br />
+                            <br />
+                            <br />
+                
+                            <div id="medicamentos" class="card">
+                                <div class="card-body">
+                                    <div class="campo-adicional">
+                                        <div class="row">
+                                            <div class="col-md-4 col-sm-12">
+                                                <label>Medication</label>
+                                                <input type="text" name="medicamento[]" class="form-control">
+                                            </div>
+                                            <div class="col-md-4 col-sm-12">
+                                                <label>Dose</label>
+                                                <input type="text" name="dosis_medicamento[]" class="form-control">
+                                            </div>
+                                            <div class="col-md-4 col-sm-12">
+                                                <label>Time</label>
+                                                <input type="time" name="hora_medicamento[]" class="form-control">
+                                            </div>
+                                            <div class="col-md-12">
+                                                <label>Comments</label>
+                                                <textarea name="comentario_medicamento[]" class="form-control" rows="3"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <br />
+                            <button type="button" class="btn btn-secondary btn-sm" onclick="agregarMedicamento()">Add medication</button>
+                            <br />
+                            <br />
+
+                
+                            <div class="mt-4">
+                                <p>Rate the following from 1 to 10 with 1 being the lowest and 10 being the highest.</p>
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <label>Pain and Discomfort</label>
+                                        <select name="dolor" class="form-control">
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                            <option value="5">5</option>
+                                            <option value="6">6</option>
+                                            <option value="7">7</option>
+                                            <option value="8">8</option>
+                                            <option value="9">9</option>
+                                            <option value="10">10</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label>Energy Level</label>
+                                        <select name="energia" class="form-control">
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                            <option value="5">5</option>
+                                            <option value="6">6</option>
+                                            <option value="7">7</option>
+                                            <option value="8">8</option>
+                                            <option value="9">9</option>
+                                            <option value="10">10</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label>Sleep Patterns</label>
+                                        <select name="sueno" class="form-control">
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                            <option value="5">5</option>
+                                            <option value="6">6</option>
+                                            <option value="7">7</option>
+                                            <option value="8">8</option>
+                                            <option value="9">9</option>
+                                            <option value="10">10</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label>Nausea / Constipation</label>
+                                        <select name="nauseas" class="form-control">
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                            <option value="5">5</option>
+                                            <option value="6">6</option>
+                                            <option value="7">7</option>
+                                            <option value="8">8</option>
+                                            <option value="9">9</option>
+                                            <option value="10">10</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                
+                            <div class="mt-4">
+                                <label>Document additional changes noted. (Use Progress notes as needed)</label>
+                                <textarea name="notas_adicionales" class="form-control"></textarea>
+                            </div>
+
+
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                
+                  <br />
+                  <br />
+
+                <input type="submit" class="btn btn-primary" name="registrarTarea" id="enviarRegistro" value="Create record">
+
+            </div>
+        </form>
+    </div>
+
+    <br />
+    <br />
+    <br />
+
+    <script>
+
+
+
+        function agregarComida() {
+            var nuevaComida = document.querySelector('#comidas .campo-adicional').cloneNode(true);
+            document.querySelector('#comidas .card-body').appendChild(nuevaComida);
+        }
+
+        function agregarActividad() {
+            var nuevaActividad = document.querySelector('#actividades .campo-adicional').cloneNode(true);
+            document.querySelector('#actividades .card-body').appendChild(nuevaActividad);
+        }
+
+        function agregarMedicamento() {
+            var nuevoMedicamento = document.querySelector('#medicamentos .campo-adicional').cloneNode(true);
+            document.querySelector('#medicamentos .card-body').appendChild(nuevoMedicamento);
+        }
+
+
+
+
+
+
+        
+        $(document).ready(function() {
+
+
+
+        function initSignaturePad() {
+            // Inicializar Signature Pad
+            var canvas = document.getElementById('signaturePad');
+            var signaturePad = new SignaturePad(canvas);
+
+            // Ajustar tamaño del canvas
+            function resizeCanvas() {
+                var ratio = Math.max(window.devicePixelRatio || 1, 1);
+                canvas.width = canvas.offsetWidth * ratio;
+                canvas.height = canvas.offsetHeight * ratio;
+                canvas.getContext('2d').scale(ratio, ratio);
+                signaturePad.clear(); // Cuando se cambia el tamaño, la firma se borra
+            }
+            window.addEventListener('resize', resizeCanvas);
+            resizeCanvas();
+
+            // Botón para limpiar la firma
+            $('#clearSignature').on('click', function(e) {
+                e.preventDefault();
+                signaturePad.clear();
+            });
+
+            
+    // Guardar la firma como imagen al enviar el formulario
+    document.getElementById('tareasForm').addEventListener('submit', function(e) {
+        var dataURL = signaturePad.toDataURL(); // Obtener la firma en formato base64
+        //console.log('Firma capturada:', dataURL);
+        //alert(dataURL);
+        if (signaturePad.isEmpty()) {
+            alert('Please sign before sending.');
+            e.preventDefault(); // Prevenir el envío del formulario si la firma está vacía
+        } else {
+            // Asignar la firma al campo oculto en el formulario
+            document.getElementById('firmaCliente').value = dataURL;
+            //alert('Firma capturada y lista para enviar.');
+        }
+    });
+            
+        }
+
+
+
+
+            $('#tareasForm').on('submit', function(e) {
+                // Validar el formulario antes de enviar
+                if (this.checkValidity() === false) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                } else {
+                    $('#enviarRegistro').addClass('disabled').val('Wait, sending...');
+                }
+                // Añadir las clases de validación de Bootstrap
+                $(this).addClass('was-validated');
+            });            
+
+            $('#client_name').on('input', function() {
+                $('#firma_cliente').val($(this).val());
+            });
+
+    $('#consultarEmpleado').on('click', function() {
+        let identificacion = $('#identificacion').val();
+        $.ajax({
+            url: 'app/verificar_cuidador.php',
+            type: 'POST',
+            data: { identificacion: identificacion },
+            dataType: 'json',
+            success: function(response) {
+                if (response.status === 'no existe') {
+                    $('#alertUser').show();
+                    $('#formularioTareas').hide();
+                    $('.header-caregiver a').hide();
+                } else {
+
+                    console.log('Nombre del cuidador recibido:', response.caregiver_name);
+                    $('.header-caregiver a').attr('href', 'caregiver.php?idcaregiver='+identificacion);
+
+                    $('#caregiver_name').val(response.caregiver_name.trim()); // Eliminar espacios en blanco alrededor
+                    $('#firma_empleado').val(response.caregiver_name.trim()); // Eliminar espacios en blanco alrededor
+
+                    // Actualizar el select con los clientes asociados
+                    var $clientSelect = $('#client_name');
+                    $clientSelect.empty(); // Limpiar el select
+
+                    response.clients.forEach(function(client) {
+                        $clientSelect.append(
+                            $('<option>', { 
+                                value: client.nombre, 
+                                text: client.nombre 
+                            })
+                        );
+                    });
+
+                $('#formularioTareas').show();
+                $('.header-caregiver a').show();
+                initSignaturePad();
+                $('#alertUser').hide();               
+            }
+        },
+        error: function(xhr, status, error) {
+            console.error('Error en la solicitud AJAX:', error);
+        }
+    });
+});
+
+        });
+
+        // Función para calcular las horas totales
+        function calcularHoras() {
+            var inicio = document.getElementById("time_started").value;
+            var fin = document.getElementById("time_finished").value;
+
+            if (inicio && fin) {
+                var inicioHoras = inicio.split(":");
+                var finHoras = fin.split(":");
+
+                var horaInicio = new Date(0, 0, 0, inicioHoras[0], inicioHoras[1]);
+                var horaFin = new Date(0, 0, 0, finHoras[0], finHoras[1]);
+
+                var diferencia = horaFin.getTime() - horaInicio.getTime();
+                var horas = diferencia / (1000 * 60 * 60);
+
+                // Redondear a dos decimales
+                horas = Math.round((horas + Number.EPSILON) * 100) / 100;
+
+                document.getElementById("total_hours").value = horas;
+            }
+        }
+    </script>
+</body>
+</html>
